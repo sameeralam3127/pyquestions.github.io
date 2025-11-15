@@ -1,1 +1,107 @@
-
+[
+  {
+    "id": 1,
+    "level": "beginner",
+    "category": "basics",
+    "q": "What is the difference between lists and tuples in Python?",
+    "a": "Lists are mutable (can be changed) and use [], tuples are immutable and use (). Tuples can be slightly faster and are hashable if they contain only hashable items."
+  },
+  {
+    "id": 2,
+    "level": "beginner",
+    "category": "basics",
+    "q": "What are Python's built-in data types?",
+    "a": "Common built-in types: int, float, bool, str, list, tuple, set, dict, range, bytes, bytearray, and NoneType."
+  },
+  {
+    "id": 3,
+    "level": "beginner",
+    "category": "basics",
+    "q": "What is PEP 8 and why is it important?",
+    "a": "PEP 8 is the Python style guide. It promotes readable, consistent code and helps teams follow common conventions."
+  },
+  {
+    "id": 4,
+    "level": "beginner",
+    "category": "basics",
+    "q": "What is the difference between `==` and `is`?",
+    "a": "`==` checks value equality, `is` checks object identity (same object in memory). Use `is` for singletons like None."
+  },
+  {
+    "id": 5,
+    "level": "beginner",
+    "category": "basics",
+    "q": "How does Python manage memory?",
+    "a": "CPython uses reference counting plus a cyclic garbage collector to free unreachable cycles; memory allocation is handled by the interpreter's allocator."
+  },
+  {
+    "id": 6,
+    "level": "beginner",
+    "category": "basics",
+    "q": "What is a virtual environment and why use it?",
+    "a": "A virtual environment isolates project-specific packages and Python versions, avoiding conflicts between projects."
+  },
+  {
+    "id": 7,
+    "level": "beginner",
+    "category": "basics",
+    "q": "What is the purpose of the `pass` statement?",
+    "a": "`pass` is a no-op placeholder used where syntax requires a statement but no action is needed (e.g., empty function/class)."
+  },
+  {
+    "id": 8,
+    "level": "beginner",
+    "category": "basics",
+    "q": "Explain mutable vs immutable types.",
+    "a": "Mutable types (list, dict, set) can change in-place; immutable types (int, str, tuple) cannot be altered after creation."
+  },
+  {
+    "id": 9,
+    "level": "beginner",
+    "category": "basics",
+    "q": "What is string slicing?",
+    "a": "String slicing extracts substrings using `s[start:stop:step]` notation — it returns a new string (original unchanged)."
+  },
+  {
+    "id": 10,
+    "level": "beginner",
+    "category": "basics",
+    "q": "What are list comprehensions?",
+    "a": "Compact syntax to build lists: `[expr for item in iterable if cond]`. They are concise and often faster than equivalent loops."
+  },
+  {
+    "id": 11,
+    "level": "beginner",
+    "category": "datastructures",
+    "q": "How do you reverse a list in Python?",
+    "a": "Use `list.reverse()` to reverse in-place, or `reversed(list)` / `list[::-1]` to get a reversed iterator or copy."
+  },
+  {
+    "id": 12,
+    "level": "beginner",
+    "category": "datastructures",
+    "q": "How do you remove duplicates from a list?",
+    "a": "Convert to a `set` (`list(dict.fromkeys(lst))` preserves order in Py3.7+). Or use `list(dict.fromkeys(lst))` for stable order."
+  },
+  {
+    "id": 13,
+    "level": "beginner",
+    "category": "datastructures",
+    "q": "Explain how a dictionary works internally.",
+    "a": "Dictionaries are hash tables mapping keys to values using hash(key) and open addressing; collisions are resolved with probing — CPython optimizes for speed and memory."
+  },
+  {
+    "id": 14,
+    "level": "beginner",
+    "category": "datastructures",
+    "q": "How do you merge two dictionaries?",
+    "a": "In Python 3.9+: `d1 | d2` or use `{**d1, **d2}` or `d1.update(d2)` to merge in-place."
+  },
+  {
+    "id": 15,
+    "level": "beginner",
+    "category": "datastructures",
+    "q": "How do you check if a key exists in a dictionary?",
+    "a": "Use `if key in d:` or `d.get(key)` (returns None or default if not present)."
+  }
+]

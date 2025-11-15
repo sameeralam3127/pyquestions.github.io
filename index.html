@@ -1,1 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>pyquestions — Python Interview Q&A</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      // Initialize dark mode based on user preference - must be in head to avoid FOUC
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+  <body
+    class="antialiased bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
+  >
+    <!-- Header -->
+    <header
+      class="sticky top-0 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
+              <i class="fab fa-python text-2xl text-sky-500"></i>
+              <h1 class="text-xl font-bold dark:text-white">pyquestions</h1>
+            </div>
+            <div
+              class="hidden md:block text-sm text-slate-500 dark:text-slate-400"
+            >
+              Python Interview Q&A — Search & Quick Filter
+            </div>
+          </div>
 
+          <div class="flex items-center space-x-4">
+            <!-- Search box for mobile -->
+            <div class="md:hidden relative">
+              <input
+                id="mobile-search"
+                type="search"
+                placeholder="Search..."
+                class="w-32 px-3 py-1.5 border rounded-md focus:outline-none focus:ring focus:ring-sky-200 dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:placeholder-slate-400"
+              />
+              <i
+                class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400"
+              ></i>
+            </div>
+
+            <!-- Theme toggle -->
+            <button
+              id="theme-toggle"
+              class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+            >
+              <i
+                class="fas fa-moon text-slate-600 dark:text-yellow-400 dark:hidden"
+              ></i>
+              <i
+                class="fas fa-sun text-slate-600 dark:text-yellow-400 hidden dark:block"
+              ></i>
+            </button>
+
+            <!-- GitHub link -->
+            <a
+              href="https://github.com"
+              target="_blank"
+              class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+            >
+              <i class="fab fa-github text-slate-600 dark:text-slate-300"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+      <!-- Sidebar -->
+      <aside
+        class="w-full md:w-72 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 p-4 flex-shrink-0"
+      >
+        <div class="mb-6">
+          <h1 class="text-lg font-semibold dark:text-white">pyquestions</h1>
+          <p class="text-sm text-slate-500 dark:text-slate-400">
+            Python interview Q&amp;A — search &amp; quick filter
+          </p>
+        </div>
+
+        <!-- Search box for desktop -->
+        <div class="mb-4 relative hidden md:block">
+          <input
+            id="search"
+            type="search"
+            placeholder="Search questions or keywords..."
+            class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-sky-200 dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:placeholder-slate-400"
+          />
+          <i
+            class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400"
+          ></i>
+        </div>
+
+        <nav class="space-y-2 text-sm">
+          <button
+            data-filter="all"
+            class="filter-btn w-full text-left px-3 py-2 rounded-md bg-sky-50 dark:bg-sky-900/30 border border-sky-100 dark:border-sky-800 flex justify-between items-center transition-colors"
+          >
+            <span class="dark:text-slate-200">All Questions</span>
+            <span
+              id="count-all"
+              class="text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-700 px-2 py-0.5 rounded-full text-xs"
+            ></span>
+          </button>
+          <button
+            data-filter="beginner"
+            class="filter-btn w-full text-left px-3 py-2 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700 flex justify-between items-center transition-colors"
+          >
+            <span class="dark:text-slate-200">Beginner</span>
+            <span
+              id="count-beginner"
+              class="text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-600 px-2 py-0.5 rounded-full text-xs"
+            ></span>
+          </button>
+          <button
+            data-filter="intermediate"
+            class="filter-btn w-full text-left px-3 py-2 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700 flex justify-between items-center transition-colors"
+          >
+            <span class="dark:text-slate-200">Intermediate</span>
+            <span
+              id="count-intermediate"
+              class="text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-600 px-2 py-0.5 rounded-full text-xs"
+            ></span>
+          </button>
+          <button
+            data-filter="advanced"
+            class="filter-btn w-full text-left px-3 py-2 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700 flex justify-between items-center transition-colors"
+          >
+            <span class="dark:text-slate-200">Advanced</span>
+            <span
+              id="count-advanced"
+              class="text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-600 px-2 py-0.5 rounded-full text-xs"
+            ></span>
+          </button>
+        </nav>
+
+        <div class="mt-6 text-xs text-slate-500 dark:text-slate-400">
+          Hints: type "list", "tuple", "GIL" or question numbers (e.g. 42)
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="flex-1 p-6">
+        <div class="max-w-4xl mx-auto">
+          <header class="mb-6">
+            <h2 class="text-2xl font-bold dark:text-white">
+              Python Interview Questions &amp; Answers
+            </h2>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+              Expandable Q&amp;A, fast client-side search, Tailwind styling —
+              single file (works on GitHub Pages).
+            </p>
+          </header>
+
+          <section id="questions-container" class="space-y-4"></section>
+
+          <footer class="mt-8 text-sm text-slate-500 dark:text-slate-400">
+            © 2025 pyquestions — Generated site. Host on
+            <a
+              class="text-sky-600 dark:text-sky-400 hover:underline"
+              href="https://pages.github.com"
+              target="_blank"
+              rel="noopener"
+              >GitHub Pages</a
+            >.
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
